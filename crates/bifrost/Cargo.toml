@@ -1,0 +1,13 @@
+[package]
+name = "bifrost"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "bifrost"
+
+[dependencies]
+bifrost_derive = { path = "bifrost_derive" }
+byteorder = { workspace = true }
+num = { workspace = true }
+thiserror = { workspace = true }

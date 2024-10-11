@@ -1,0 +1,47 @@
+# the team number, used to construct ip addresses of
+# robots, e.g. 10.0.8.25
+team_number = 8
+
+[[robots]]
+name = "local"
+number = 0
+
+[[robots]]
+name = "sam"
+number = 20
+
+[[robots]]
+name = "moos"
+number = 21
+
+[[robots]]
+name = "phineas"
+number = 22
+
+[[robots]]
+name = "ferb"
+number = 23
+
+[[robots]]
+name = "momo"
+number = 24
+
+[[robots]]
+name = "appa"
+number = 25
+
+[[robots]]
+name = "daphne"
+number = 26
+
+[[robots]]
+name = "perry"
+number = 27
+
+[[robots]]
+name = "barbie"
+number = 28
+
+[[robots]]
+name = "ken"
+number = 29

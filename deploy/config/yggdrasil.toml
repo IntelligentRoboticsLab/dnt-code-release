@@ -1,0 +1,121 @@
+[filter.button]
+# The threshold for a button to be considered pressed.
+activation_threshold = 0.5
+# The time (in ms) a button needs to be held down, in order to be considered held down.
+held_duration_threshold = 500
+
+[filter.fsr]
+# Threshold for ground contact detection using average FSR sensor values from both feet.
+ground_contact_threshold = 0.01
+
+[primary_state]
+# Time duration between chest blinks in ms.
+chest_blink_interval = 1000
+
+[game_controller]
+# Delay (in ms) between the status updates the robot sends to the game-controller.
+game_controller_return_delay = 500
+# The maximum time (in ms) allowed between game-controller messages.
+# If the robot doesn't receive a game-controller message for this amount of time,
+# it will consider the connection to the game-controller as "lost".
+game_controller_timeout = 5000
+
+[camera.top]
+# The path to the camera device.
+path = "/dev/video-top"
+# The requested width of the image.
+width = 640
+# The requested height of the image.
+height = 480
+# This variable specifies how many images from the top camera can be alive at the same time.
+# It is recommended to have at least one more buffer than is required. This way, the next frame
+# from the camera can already be stored in a buffer, reducing the latency between destructing a
+# `TopImage` and being able to fetch the newest `TopImage`.
+num_buffers = 5
+# Whether the image should be flipped horizontally.
+flip_horizontally = true
+# Whether the image should be flipped vertically.
+flip_vertically = true
+# Whether the image focus automatically
+focus_auto = false
+# Whether to turn on auto exposure
+exposure_auto = true
+
+[camera.top.calibration]
+# The extrinsic rotation for the camera in degrees, xyz euler angles.
+extrinsic_rotation = [0.04, -3.001, 1.3]
+# The focal length for the camera in pixels.
+focal_lengths = [608, 609]
+# The optical center of the camera sensor in pixels.
+cc_optical_center = [320, 240]
+
+[camera.bottom]
+# The path to the camera device.
+path = "/dev/video-bottom"
+# The requested width of the image.
+width = 320
+# The requested height of the image.
+height = 240
+# This variable specifies how many images from the bottom camera can be alive at the same time.
+# It is recommended to have at least one more buffer than is required. This way, the next frame
+# from the camera can already be stored in a buffer, reducing the latency between destructing a
+# `BottomImage` and being able to fetch the newest `BottomImage`.
+num_buffers = 5
+# Whether the image should be flipped horizontally.
+flip_horizontally = false
+# Whether the image should be flipped vertically.
+flip_vertically = false
+# Whether the image focus automatically
+focus_auto = false
+# Whether to turn on auto exposure
+exposure_auto = true
+
+[camera.bottom.calibration]
+# The extrinsic rotation for the camera in degrees, euler angles.
+extrinsic_rotation = [0, 0, 0]
+# The focal length for the camera in pixels.
+focal_lengths = [570, 570]
+# The optical center of the camera sensor in pixels
+cc_optical_center = [320, 240]
+
+
+[vision.field_marks]
+# The distance after which field marks are considered to be too far away to be detected, in meters.
+distance_threshold = 15.0
+# The tolerance for the angle between two lines being close to 90 degrees, in degrees.
+angle_tolerance = 10
+# The confidence threshold for the softmax score predicted by the classification model
+confidence_threshold = 0.7
+# The size of a patch at 1.0 meters distance in pixels.
+# This value is divided by the distance to get the size of the patch at that distance, and the patch is then
+# resized to 32x32 pixels before being fed into the neural network.
+patch_scale = 140
+# The maximum amount of time (in micro seconds) we can spend on classifying field mark proposals.
+# If this time is exceeded, we will skip the classification of the remaining proposals.
+time_budget = 3000
+
+[odometry]
+# The scale factor for the odometry values along the x and y axis respectively.
+# This is used to calibrate the odometry values to the actual distance the robot has moved.
+# Values taken from rUNSWift 2014 walk
+scale_factor = [0.81, 1.19]
+
+# The configuration for the odometry filter.
+# The filter is an implementation of this paper https://www.mdpi.com/1424-8220/15/8/19302/pdf
+[orientation]
+# The weight of the orientation correction computed from the accelerometer.
+# This weight is further scaled based on the acceleration relative to the gravity.
+acceleration_weight = 0.01
+
+# The following values are used to determine if the robot is moving or not.
+# If the robot is not moving, the estimated orientation is updated.
+
+# The threshold for the acceleration values from the IMU.
+# If the acceleration is below this threshold,  the robot is considered to be moving
+acceleration_threshold = 0.2
+# The threshold for the gyro values from the IMU.
+# If any of the gyro valeus is below this threshold, the robot is considered to be moving.
+gyro_threshold = 0.1
+# The threshold for the sum of each FSR foot.
+# If the FSR value is below this threshold, the robot is considered to be moving.
+fsr_threshold = 5
